@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://alugame.onrender.com/",
+    origin: "https://alugame.onrender.com",
   })
 );
 
