@@ -50,7 +50,9 @@ const login = async (req, res) => {
         {},
         (err, token) => {
           if (err) throw err;
-          res.cookie("token", token).json(user);
+          res
+            .cookie("token", token, { domain: "alugame.onrender.com" })
+            .json(user);
         }
       );
     } else {
