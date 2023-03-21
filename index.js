@@ -35,6 +35,7 @@ app.use(
   cors({
     credentials: true,
     origin: "https://alugame.onrender.com",
+    // origin: "http://127.0.0.1/5173",
   })
 );
 

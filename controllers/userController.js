@@ -29,6 +29,8 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
+  const jwtSecret = "a1d30dc0vZx0zAsl1k3m";
+
   // Validations
   const user = await User.findOne({ email: email });
 
@@ -44,7 +46,7 @@ const login = async (req, res) => {
       // If both pwd matches, login jwt is signed
       jwt.sign(
         { email: user.email, id: user._id },
-        process.env.JWT_SECRET,
+        jwtSecret,
         {},
         (err, token) => {
           if (err) throw err;
@@ -61,7 +63,7 @@ const login = async (req, res) => {
 const profile = (req, res) => {
   const { token } = req.cookies;
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, cookieData) => {
+    jwt.verify(token, jwtSecret, {}, async (err, cookieData) => {
       if (err) throw err;
       const { name, email, _id } = await User.findById(cookieData.id);
       res.json({ name, email, _id });
